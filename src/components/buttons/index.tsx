@@ -1,7 +1,10 @@
 import { ActivityIndicator, Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import {Ionicons} from '@expo/vector-icons'
-import React from "react"
+import React  from "react"
 import { styles } from "./styles";
+
+
+
 
 interface ButtonProps extends TouchableOpacityProps{
     title: string
@@ -11,6 +14,9 @@ interface ButtonProps extends TouchableOpacityProps{
 
 
 export function Button({title, isLoading = false, icon, ...rest}:ButtonProps){
+
+    
+
     return (
         <TouchableOpacity style={styles.container} disabled={isLoading} activeOpacity={0.8} {...rest}>
             {isLoading ? (<ActivityIndicator color='green'/> ):
