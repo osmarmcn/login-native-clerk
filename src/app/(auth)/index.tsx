@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Button } from "@//components/buttons";
+import { useAuth, useUser } from "@clerk/clerk-expo";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 
 export default function Home(){
+
+  const {user} = useUser()
+  const {signOut} = useAuth()
+
+
     return (
       <View style={styles.container}>
 
-        <Text style={styles.text}>Home Screen</Text>
+        <Image source={{uri: user?.imageUrl}} style={styles.image}/>
+        <Text style={styles.text}>Olá, {user?.fullName}!</Text>
+        <Button icon="exit" title="sair" onPress={()=> signOut()}/> 
 
       </View>  
     )
@@ -23,6 +32,14 @@ const styles = StyleSheet.create({
     text:{
         fontSize:24,
         fontWeight:'bold',
-        color:'#fff'
+        color:'#fff',
+        marginBottom:20
+    },
+    image:{
+      width:100,
+      height:100,
+      borderRadius:50,
+      marginBottom:20
+  
     }
 })

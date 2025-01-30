@@ -2,6 +2,7 @@ import { router, Slot } from "expo-router";
 import {ClerkProvider, useAuth} from '@clerk/clerk-expo'
 import { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
+import { tokenCache } from "../storage/tokenCache";
 
 
 
@@ -16,10 +17,10 @@ function InitialLayout(){
         if(!isLoaded) return  
 
         if(isSignedIn){
-            router.replace("(auth)")
+            router.replace("/(auth)")
 
         }else{
-            router.replace("(public)")
+            router.replace("/(public)")
         }
             
     },[isSignedIn])
@@ -40,7 +41,7 @@ export default function Layout(){
 
     
     return (
-        <ClerkProvider publishableKey={google}>
+        <ClerkProvider publishableKey={google} tokenCache={tokenCache}>
             <InitialLayout />
         </ClerkProvider>
     )
